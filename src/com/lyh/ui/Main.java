@@ -1,9 +1,9 @@
 package com.lyh.ui;
 
-import javax.swing.JFrame;
+import com.lyh.util.WindowLocationUtil;
 
 public class Main {
 	public static void main(String[] args) {
-		JFrame frame = new JFrame();
+		ServerWindow window = new ServerWindow();
 	}
 }
