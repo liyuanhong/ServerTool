@@ -72,6 +72,7 @@ public class ServerWindow {
 		tabPanel = new JTabbedPane(JTabbedPane.TOP);    //add the tabpanel
 		tabpanePanelControl = new JPanel();
 		tabpanePanelLog = new JPanel();
+		tabpanePanelControl.setLayout(new BorderLayout());
 		tabPanel.addTab("øÿ÷∆", tabpanePanelControl);
 		tabPanel.addTab("»’÷æ", tabpanePanelLog);
 		centerPanel.add(tabPanel,BorderLayout.CENTER);
