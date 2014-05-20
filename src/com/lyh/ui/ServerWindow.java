@@ -19,10 +19,10 @@ import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import com.lyh.listener.ButStartServerListener;
 import com.lyh.util.WindowLocationUtil;
 
 public class ServerWindow {
-	private String startSerButText = "Æô¶¯";
 	private Font font = new Font("Ó×Ô²", Font.BOLD, 13);
 	
 	
@@ -61,6 +61,7 @@ public class ServerWindow {
 	
 	public ServerWindow() {
 		init();
+		addListener();
 	}
 	
 	public void init(){
@@ -84,7 +85,7 @@ public class ServerWindow {
 		setPortText.setColumns(5);
 		topPanel.add(setPortText);
 		
-		startServiceBut = new JButton(startSerButText);  //add the start button
+		startServiceBut = new JButton("Æô¶¯");  //add the start button
 		topPanel.add(startServiceBut);
 		
 		addressLabel = new JLabel();
@@ -166,10 +167,12 @@ public class ServerWindow {
 		bottonPanel.add(circularSkinRad);
 				
 		frame.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		WindowLocationUtil.setWindowInScreenCenter(frame);		
 	}
 	
 	public void addListener(){
-		
+		startServiceBut.addMouseListener(new ButStartServerListener(frame, startServiceBut, 
+				setPortText, addressField));
 	}
 }
