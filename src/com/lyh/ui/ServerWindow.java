@@ -20,10 +20,12 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.lyh.listener.ButStartServerListener;
+import com.lyh.param.GlobalParam;
 import com.lyh.util.WindowLocationUtil;
 
 public class ServerWindow {
 	private Font font = new Font("свт╡", Font.BOLD, 13);
+	private GlobalParam global = new GlobalParam();    //transform the parms
 	
 	
 	private JFrame frame;             //this is the main frame
@@ -173,6 +175,6 @@ public class ServerWindow {
 	
 	public void addListener(){
 		startServiceBut.addMouseListener(new ButStartServerListener(frame, startServiceBut, 
-				setPortText, addressField));
+				setPortText, addressField,global));
 	}
 }
