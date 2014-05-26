@@ -3,6 +3,8 @@ package com.lyh.listener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -31,7 +33,7 @@ public class ButStartServerListener extends MouseAdapter{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		super.mouseClicked(e);
-		if(startServiceBut.getText().equals("Æô¶¯")){
+		if(startServiceBut.getText().equals("Æô¶¯")){			
 			start();
 		}else if(startServiceBut.getText().equals("Í£Ö¹")){
 			stop();
@@ -40,17 +42,31 @@ public class ButStartServerListener extends MouseAdapter{
 	
 	private void start(){
 		setPortText.setEditable(false);
+		addressField.setEditable(false);
 		startServiceBut.setForeground(Color.RED);
 		startServiceBut.setText("Í£Ö¹");
 		global.setServerStatus(1);
-		//server = new MainServer(global);
+		server = new MainServer(global,setPortText,addressField);
+		addressField.setText(getAddress() + ":" + setPortText.getText());		
 		server.start();
 	}
 	
 	private void stop(){
 		setPortText.setEditable(true);
+		addressField.setEditable(true);
 		startServiceBut.setForeground(Color.BLACK);
+		addressField.setText("");
 		startServiceBut.setText("Æô¶¯");
 		global.setServerStatus(0);
+	}
+	
+	private String getAddress(){
+		String ip = "";
+		try {
+			ip = InetAddress.getLocalHost().getHostAddress().toString();
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+		return ip;
 	}
 }

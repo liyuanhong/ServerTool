@@ -27,15 +27,29 @@ public class MainServer extends Thread{
 	}
 	
 	private void serverStart(){
-		System.out.println("hello world!");
+		if(global.getResponseStye() == 0){
+			defaultStyle();
+		}else if(global.getResponseStye() == 1){
+			specialStyle();
+		}else if(global.getResponseStye() == 2){
+			returnNoneStyle();
+		}
 	}
 	
 	private void serverStop(){
 		return;
 	}
 	
-	private String getAddress(){
+	//three of the response style
+	private void defaultStyle(){
 		
-		return "";
+	}
+	
+	private void specialStyle(){
+		
+	}
+	
+	private void returnNoneStyle(){
+		
 	}
 }
