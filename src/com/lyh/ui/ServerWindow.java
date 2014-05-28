@@ -143,6 +143,7 @@ public class ServerWindow {
 		contentTextArea.setFont(new Font("свт╡", Font.PLAIN, 14));
 		contentTextScrollPane.setViewportView(contentTextArea);
 		tabpanePanelControl.add(contentTextScrollPane,BorderLayout.CENTER);
+		contentTextArea.setLineWrap(true);
 		
 		logScrollpanel = new JScrollPane();            //add the log text box
 		logArea = new JTextArea();
