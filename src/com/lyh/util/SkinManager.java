@@ -5,6 +5,7 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.LookAndFeel;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -49,5 +50,6 @@ public class SkinManager {
 					"пео╒", JOptionPane.INFORMATION_MESSAGE);
 			e.printStackTrace();
 		}
+		SwingUtilities.updateComponentTreeUI(frame);
 	}
 }

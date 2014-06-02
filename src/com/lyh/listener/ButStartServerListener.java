@@ -3,11 +3,13 @@ package com.lyh.listener;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import com.lyh.param.GlobalParam;
@@ -18,16 +20,21 @@ public class ButStartServerListener extends MouseAdapter{
 	private JButton startServiceBut; 
 	private JTextField setPortText;
 	private JTextField addressField;
+	private JTextArea contentTextArea;
 	private GlobalParam global;
 	private MainServer server;
+	private JTextArea logArea;
 		
 	public ButStartServerListener(JFrame frame, JButton startServiceBut,
-			JTextField setPortText, JTextField addressField,GlobalParam global) {
+			JTextField setPortText, JTextField addressField,GlobalParam global,
+			JTextArea contentTextArea,JTextArea logArea) {
 		this.frame = frame;
 		this.startServiceBut = startServiceBut;
 		this.setPortText = setPortText;
 		this.addressField = addressField;
+		this.contentTextArea = contentTextArea;
 		this.global = global;
+		this.logArea = logArea;
 	}
 
 	@Override
@@ -46,8 +53,9 @@ public class ButStartServerListener extends MouseAdapter{
 		startServiceBut.setForeground(Color.RED);
 		startServiceBut.setText("Í£Ö¹");
 		global.setServerStatus(1);
-		server = new MainServer(global,setPortText,addressField);
-		addressField.setText(getAddress() + ":" + setPortText.getText());		
+		server = new MainServer(global,setPortText,addressField,contentTextArea,logArea);
+		addressField.setText(getAddress() + ":" + setPortText.getText());	
+		global.setIPAddress(getAddress());
 		server.start();
 	}
 	
@@ -58,6 +66,11 @@ public class ButStartServerListener extends MouseAdapter{
 		addressField.setText("");
 		startServiceBut.setText("Æô¶¯");
 		global.setServerStatus(0);
+		try {
+			global.getServer().close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}		
 	}
 	
 	private String getAddress(){

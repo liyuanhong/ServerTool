@@ -20,6 +20,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import com.lyh.listener.ButStartServerListener;
+import com.lyh.listener.ChangeSkinListener;
+import com.lyh.listener.ReturnStyleListener;
 import com.lyh.param.GlobalParam;
 import com.lyh.util.WindowLocationUtil;
 
@@ -50,8 +52,8 @@ public class ServerWindow {
 	   private JRadioButton specifyRadio;
 	   private JRadioButton noneRadio;
 	private JPanel tabpanePanelLog;
-	   JScrollPane logScrollpanel;
-	      JTextArea logArea;
+	   private JScrollPane logScrollpanel;
+	      private JTextArea logArea;
 	private JPanel tabpanePanelControl_top;
 	   
 	private JRadioButton defaultSkinRad;
@@ -175,6 +177,20 @@ public class ServerWindow {
 	
 	public void addListener(){
 		startServiceBut.addMouseListener(new ButStartServerListener(frame, startServiceBut, 
-				setPortText, addressField,global));
+				setPortText, addressField,global,contentTextArea,logArea));
+		defaultRadio.addMouseListener(new ReturnStyleListener(defaultRadio, specifyRadio, 
+				noneRadio, global));
+		specifyRadio.addMouseListener(new ReturnStyleListener(defaultRadio, specifyRadio, 
+				noneRadio, global));
+		noneRadio.addMouseListener(new ReturnStyleListener(defaultRadio, specifyRadio, 
+				noneRadio, global));
+		defaultSkinRad.addMouseListener(new ChangeSkinListener(defaultSkinRad, winSkinRad, 
+				colorSkinRad, circularSkinRad, frame, global));
+		winSkinRad.addMouseListener(new ChangeSkinListener(defaultSkinRad, winSkinRad, 
+				colorSkinRad, circularSkinRad, frame, global));
+		colorSkinRad.addMouseListener(new ChangeSkinListener(defaultSkinRad, winSkinRad, 
+				colorSkinRad, circularSkinRad, frame, global));
+		circularSkinRad.addMouseListener(new ChangeSkinListener(defaultSkinRad, winSkinRad, 
+				colorSkinRad, circularSkinRad, frame, global));
 	}
 }
