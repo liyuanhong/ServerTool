@@ -49,7 +49,15 @@ public class MainServer extends Thread{
 		}		
 	}
 	
-	private void serverStart(){
+	private void serverStart(){		
+		try {
+			global.setServer(server);
+			socket = server.accept();
+			global.setSocket(socket);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}			
+		
 		if(global.getResponseStye() == 0){
 			defaultStyle();
 		}else if(global.getResponseStye() == 1){
@@ -71,21 +79,15 @@ public class MainServer extends Thread{
 	//three of the response style
 	private void defaultStyle(){
 		try {
-			String str = "";
-			global.setServer(server);
-			socket = server.accept();			
-			global.setSocket(socket);
-						
-			
+			String str = "";												
 			InputStream is = socket.getInputStream();
             String line = readLine(is, socket);	
 			
-			System.out.println(socket);
+//			System.out.println(socket);
 			InetSocketAddress add = (InetSocketAddress) socket.getRemoteSocketAddress();
 			str = add.getAddress() + String.valueOf(add.getPort());	
 			
-			
-			System.out.println("default");
+//			System.out.println("default");			
 			OutputStreamWriter output = new OutputStreamWriter(socket.getOutputStream());
 			output.write(str);
 			output.close();
@@ -98,10 +100,8 @@ public class MainServer extends Thread{
 	private void specialStyle(){
 		try {
 			String str = "";
-			global.setServer(server);
-			socket = server.accept();
 			str = contentTextArea.getText();
-			System.out.println("special");
+//			System.out.println("special");
 			
 			OutputStreamWriter output = new OutputStreamWriter(socket.getOutputStream());
 			output.write(str);
@@ -115,10 +115,8 @@ public class MainServer extends Thread{
 	private void returnNoneStyle(){
 		try {
 			String str = "";
-			global.setServer(server);
-			socket = server.accept();
 			str = contentTextArea.getText();
-			System.out.println("none");			
+//			System.out.println("none");			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
