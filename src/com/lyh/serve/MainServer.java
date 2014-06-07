@@ -54,6 +54,9 @@ public class MainServer extends Thread{
 			global.setServer(server);
 			socket = server.accept();
 			global.setSocket(socket);
+			
+			InputStream is = socket.getInputStream();
+            String line = readLine(is, socket);	
 		} catch (IOException e) {
 			e.printStackTrace();
 		}			
@@ -79,9 +82,7 @@ public class MainServer extends Thread{
 	//three of the response style
 	private void defaultStyle(){
 		try {
-			String str = "";												
-			InputStream is = socket.getInputStream();
-            String line = readLine(is, socket);	
+			String str = "";															
 			
 //			System.out.println(socket);
 			InetSocketAddress add = (InetSocketAddress) socket.getRemoteSocketAddress();
